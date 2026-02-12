@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Cookie Nano Banana Sync",
+  "name": "Google Cookie Sync",
   "version": "0.1.0",
   "description": "Sync cookies between Chrome profiles.",
   "permissions": ["cookies", "storage", "alarms", "identity"],

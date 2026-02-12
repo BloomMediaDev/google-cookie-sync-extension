@@ -9,18 +9,19 @@ Chrome extension (Manifest V3) that periodically reads Google login cookies (`__
 
 | # | Phase | Status | Priority | Est. Time |
 |---|-------|--------|----------|-----------|
-| 1 | Project Scaffolding & Manifest | ⬜ TODO | Critical | 15 min |
-| 2 | Background Service Worker | ⬜ TODO | Critical | 45 min |
-| 3 | Options UI (HTML + CSS) | ⬜ TODO | Critical | 30 min |
-| 4 | Options Logic (JS) | ⬜ TODO | Critical | 30 min |
-| 5 | Integration & Testing | ⬜ TODO | High | 30 min |
-| 6 | Documentation (README) | ⬜ TODO | Medium | 15 min |
+| 1 | Project Scaffolding & Manifest | ✅ Done | Critical | 15 min |
+| 2 | Background Service Worker | ✅ Done | Critical | 45 min |
+| 3 | Options UI (HTML + CSS) | ✅ Done | Critical | 30 min |
+| 4 | Options Logic (JS) | ✅ Done | Critical | 30 min |
+| 5 | Integration & Testing | ⚠️ Pending | High | 30 min |
+| 6 | Documentation (README) | ✅ Done | Medium | 15 min |
+| 7 | CI/CD Release Workflow | ✅ Done | Medium | 20 min |
 
 ## Dependencies
 ```
 Phase 1 → Phase 2 → Phase 4
 Phase 1 → Phase 3 → Phase 4
-Phase 2 + Phase 4 → Phase 5 → Phase 6
+Phase 2 + Phase 4 → Phase 5 → Phase 6 → Phase 7
 ```
 
 ## Key Decisions

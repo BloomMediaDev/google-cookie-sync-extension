@@ -1,4 +1,4 @@
-# Cookie Nano Banana Sync Extension
+# Google Cookie Sync Extension
 
 Sync Google account cookies to a configurable endpoint on a schedule or on demand.
 
@@ -45,3 +45,6 @@ Run the local test server to verify payloads.
 ```bash
 node test-server.js
 ```
+
+## Releases
+- Tag a release with `vX.Y.Z` to publish a GitHub release containing the extension zip.
