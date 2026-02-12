@@ -79,6 +79,34 @@ input[type="number"] {
   font-size: 13px;
 }
 
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 0.9em;
+}
+
+.history-table th, .history-table td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.history-table th {
+  background-color: #f2f2f2;
+}
+
+.error-row {
+  background-color: #fff0f0;
+}
+
+.details-cell {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .status-success {
   color: #2e7d32;
 }
