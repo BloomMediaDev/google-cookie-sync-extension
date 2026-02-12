@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      body {
+        width: 300px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        padding: 16px;
+        margin: 0;
+      }
+      h1 {
+        font-size: 16px;
+        margin-top: 0;
+      }
+      .status-box {
+        background: #f8f9fa;
+        padding: 12px;
+        border-radius: 4px;
+        margin-bottom: 12px;
+        font-size: 13px;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 4px;
+      }
+      .label {
+        color: #666;
+      }
+      .value {
+        font-weight: 500;
+      }
+      .status-success { color: #2e7d32; }
+      .status-failed { color: #c62828; }
+      .status-idle { color: #888; }
+      
+      button {
+        width: 100%;
+        padding: 8px;
+        background: #1a73e8;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      button:hover {
+        opacity: 0.9;
+      }
+      .secondary-btn {
+        background: #fff;
+        color: #1a73e8;
+        border: 1px solid #1a73e8;
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Google Cookie Sync</h1>
+    
+    <div class="status-box">
+      <div class="row">
+        <span class="label">Last Sync:</span>
+        <span class="value" id="last_sync_at">Never</span>
+      </div>
+      <div class="row">
+        <span class="label">Status:</span>
+        <span class="value" id="last_sync_status">Idle</span>
+      </div>
+      <div id="error_container" style="display: none; margin-top: 8px; color: #c62828;">
+        <span id="last_sync_error"></span>
+      </div>
+    </div>
+
+    <button id="btn_sync">Sync Now</button>
+    <button id="btn_options" class="secondary-btn">Open Settings & History</button>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
