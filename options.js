@@ -5,7 +5,7 @@ const DEFAULTS = {
   auto_sync: true,
   last_sync_at: null,
   last_sync_status: "idle",
-  last_sync_error: ""
+  sync_history: []
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("sync_interval").value = merged.sync_interval_minutes;
   document.getElementById("auto_sync").checked = merged.auto_sync !== false;
   renderStatus(merged);
+  renderHistory(merged.sync_history);
 });
 
 document.getElementById("btn_save").addEventListener("click", async () => {
@@ -57,12 +58,44 @@ document.getElementById("btn_sync").addEventListener("click", async () => {
 
 chrome.storage.onChanged.addListener((changes, areaName) => {
   if (areaName !== "sync") return;
-  if (changes.last_sync_at || changes.last_sync_status || changes.last_sync_error) {
-    chrome.storage.sync.get(null).then((settings) => {
+  chrome.storage.sync.get(null).then((settings) => {
+    if (changes.last_sync_at || changes.last_sync_status || changes.last_sync_error) {
       renderStatus({ ...DEFAULTS, ...settings });
-    });
-  }
+    }
+    if (changes.sync_history) {
+      renderHistory(settings.sync_history);
+    }
+  });
 });
+
+function renderHistory(history) {
+  const list = document.getElementById("history_list");
+  if (!history || history.length === 0) {
+    list.innerHTML = "<p>No history yet.</p>";
+    return;
+  }
+
+  list.innerHTML = `
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Status</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${history.map(item => `
+          <tr class="${item.status === 'failed' ? 'error-row' : ''}">
+            <td>${new Date(item.timestamp).toLocaleString()}</td>
+            <td class="status-${item.status}">${item.status}</td>
+            <td class="details-cell">${item.error || "Success"}</td>
+          </tr>
+        `).join("")}
+      </tbody>
+    </table>
+  `;
+}
 
 function renderStatus(settings) {
   const atEl = document.getElementById("last_sync_at");

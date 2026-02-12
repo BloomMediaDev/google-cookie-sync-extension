@@ -5,7 +5,8 @@ const DEFAULTS = {
   auto_sync: true,
   last_sync_at: null,
   last_sync_status: "idle",
-  last_sync_error: ""
+  last_sync_error: "",
+  sync_history: []
 };
 
 const ALARM_NAME = "cookie_sync";
@@ -108,9 +109,19 @@ async function syncCookies() {
 }
 
 async function updateStatus(status, error) {
+  const timestamp = new Date().toISOString();
+  const { sync_history } = await chrome.storage.sync.get("sync_history");
+  
+  // Keep last 50 entries
+  const newHistory = [
+    { timestamp, status, error: error || "" },
+    ...(sync_history || [])
+  ].slice(0, 50);
+
   await chrome.storage.sync.set({
-    last_sync_at: new Date().toISOString(),
+    last_sync_at: timestamp,
     last_sync_status: status,
-    last_sync_error: error || ""
+    last_sync_error: error || "",
+    sync_history: newHistory
   });
 }
