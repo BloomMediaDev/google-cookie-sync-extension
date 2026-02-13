@@ -20,8 +20,10 @@ jobs:
           zip -r google-cookie-sync-extension.zip . \
             -x ".git/*" \
             -x ".github/*" \
+            -x ".beads/*" \
             -x "plans/*" \
             -x "node_modules/*" \
+            -x "AGENTS.md" \
             -x "*.zip"
 
       - name: Publish GitHub Release
