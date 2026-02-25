@@ -19,11 +19,18 @@ jobs:
         run: |
           zip -r google-cookie-sync-extension.zip . \
             -x ".git/*" \
+            -x ".git/" \
             -x ".github/*" \
+            -x ".github/" \
             -x ".beads/*" \
+            -x ".beads/" \
             -x "plans/*" \
+            -x "plans/" \
             -x "node_modules/*" \
+            -x "node_modules/" \
             -x "AGENTS.md" \
+            -x "README.md" \
+            -x "test-server.js" \
             -x "*.zip"
 
       - name: Publish GitHub Release
