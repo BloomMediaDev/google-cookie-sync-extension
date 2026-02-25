@@ -33,6 +33,19 @@ Sync Google account cookies to a configurable endpoint on a schedule or on deman
 4. Click **Save Settings**.
 5. Click **Sync Now** to manually sync and confirm status.
 
+## Payload
+The extension sends a JSON payload to `/sync-cookie` with the following fields:
+
+```json
+{
+  "name": "identifier (email or configured name)",
+  "secure_1psid": "value of __Secure-1PSID",
+  "secure_1psidts": "value of __Secure-1PSIDTS"
+}
+```
+
+If `name` is empty or not found on the server, it can fall back to identifying the client by `secure_1psid`.
+
 ## Troubleshooting
 - **Missing Google cookies**: Log into Google in the same Chrome profile, then try again.
 - **Endpoint unreachable**: Verify the server is running and the URL is correct.

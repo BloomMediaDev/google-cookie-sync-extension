@@ -65,7 +65,7 @@ async function resolveName(settings) {
   } catch (error) {
     // Ignore identity lookup failures.
   }
-  return `Chrome Sync - ${new Date().toISOString().slice(0, 19).replace("T", " ")}`;
+  return "";
 }
 
 async function syncCookies() {
