@@ -1,6 +1,7 @@
 const DEFAULTS = {
   endpoint_url: "http://localhost:8765/sync-cookie",
   cookie_name: "",
+  generated_name: "",
   sync_interval_minutes: 15,
   auto_sync: true,
   last_sync_at: null,
@@ -16,6 +17,9 @@ const GOOGLE_URL = "https://accounts.google.com";
 chrome.runtime.onInstalled.addListener(async () => {
   const stored = await chrome.storage.sync.get(Object.keys(DEFAULTS));
   const settings = { ...DEFAULTS, ...stored };
+  if (!settings.generated_name) {
+    settings.generated_name = generateClientName();
+  }
   await chrome.storage.sync.set(settings);
   await chrome.alarms.create(ALARM_NAME, {
     periodInMinutes: settings.sync_interval_minutes
@@ -59,13 +63,19 @@ async function readCookies() {
 
 async function resolveName(settings) {
   if (settings.cookie_name) return settings.cookie_name;
-  try {
-    const info = await chrome.identity.getProfileUserInfo({ accountStatus: "ANY" });
-    if (info.email) return info.email;
-  } catch (error) {
-    // Ignore identity lookup failures.
-  }
-  return "";
+  if (settings.generated_name) return settings.generated_name;
+  const generated = generateClientName();
+  await chrome.storage.sync.set({ generated_name: generated });
+  return generated;
+}
+
+function generateClientName() {
+  const bytes = new Uint8Array(4);
+  crypto.getRandomValues(bytes);
+  const suffix = Array.from(bytes)
+    .map((value) => value.toString(16).padStart(2, "0"))
+    .join("");
+  return `Chrome Client ${suffix}`;
 }
 
 async function syncCookies() {

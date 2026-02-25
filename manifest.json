@@ -3,7 +3,7 @@
   "name": "Google Cookie Sync",
   "version": "0.3.0",
   "description": "Sync cookies between Chrome profiles.",
-  "permissions": ["cookies", "storage", "alarms", "identity"],
+  "permissions": ["cookies", "storage", "alarms"],
   "host_permissions": ["https://*.google.com/*", "http://localhost:8765/*"],
   "action": {
     "default_popup": "popup.html"

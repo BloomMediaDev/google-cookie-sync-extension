@@ -1,6 +1,7 @@
 const DEFAULTS = {
   endpoint_url: "",
   cookie_name: "",
+  generated_name: "",
   sync_interval_minutes: 15,
   auto_sync: true,
   last_sync_at: null,
